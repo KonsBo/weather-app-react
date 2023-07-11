@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import FormattedDate from "./FormattedDate";
 import axios from "axios";
 import "./Weather.css";
 
@@ -12,8 +13,8 @@ export default function Weather(props) {
       humidity: response.data.main.humidity,
       description: response.data.weather[0].description,
       iconUrl: " https://openweathermap.org/img/wn/10d@2x.png",
-      date: "Wednasday 07:00",
-      wind: response.data.main.wind.speed,
+      date: new Date(response.data.dt * 1000),
+      wind: response.data.wind.speed,
       city: response.data.name,
     });
   }
@@ -41,7 +42,9 @@ export default function Weather(props) {
         </form>
         <h1>{weatherData.city}</h1>
         <ul>
-          <li>{weatherData.date}</li>
+          <li>
+            <FormattedDate date={weatherData.date} />
+          </li>
           <li className="text-capitalize">{weatherData.description}</li>
         </ul>
         <div className="row mt-3">
@@ -71,7 +74,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = "f5201594abea9f3e38b70e65b11a80c24";
+    const apiKey = "6f578b96aa9505bcce148ac22cb85794";
 
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(handleResponse);

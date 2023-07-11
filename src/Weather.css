@@ -12,6 +12,10 @@
   margin: 20px 0 0 0;
   line-height: 29px;
 }
+.Weather .clearfix {
+  display: flex;
+  align-items: center;
+}
 
 .Weather ul {
   margin: 0;
